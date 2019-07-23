@@ -83,6 +83,8 @@ RED <- function(dat, grp){
 
   #####Calculate intergroup distance#####
   
+  ##### vvv Section to improve vvv #####
+  ###loops iterate over data to ultimately summarize group differences. 
 
   
   store<-array(NA,c(maxN,maxN)) ##individual(n) x individual(l) comparison (can be within or between groups(j,k))
@@ -126,6 +128,8 @@ RED <- function(dat, grp){
 red1 = RED(dat, grp)
 
 
+##### vvv DEE working on alternative calculation steps vvv #####
+
 t.mat = matrix(data = NA, nrow = maxN, ncol = maxN)
 g.mat = array(data = NA, dim = length(levels(grp), length(levels(grp), ncol(dat))))
 for (t in 1:ncol(dat)){
@@ -141,6 +145,8 @@ for (t in 1:ncol(dat)){
     }
   }
 }
+
+##### ^^^^^ alt workflow ^^^^ #####
 
 ####Default Plotting#####
 cluster<-hclust(as.dist(red1$RED.dist), method="ward.D2")
