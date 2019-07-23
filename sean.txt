@@ -1,49 +1,9 @@
-###RED Function WIP####
-
-##Code written by John Daniels: Willermet, Daniels, Edgar 2016 AAPA
-##Modified by DEE 2019
-
-#This is an example R-code for the forensic data
-#'set used in the Robust Estimate of Grade Differences (RED)  A more generic function,
-#'that can be used on any R dataframe is being written at this time.#
-
-
-##Read in test data set from forensic
-
-dat = (read.csv("forensic.csv"))
-
-##reclass 99 as NA
-dat[dat==99] = NA 
-
-##Realize data.frame is appropriate structure
-grp = dat[,1]
-dat = as.matrix(dat[,2:12])
-
-##check strcture
-str(dat)
-
-
-z.score <- function(dat){
-  dat <- as.matrix(dat)
-  
-  for (i in 1:ncol(dat)){
-    for (j in 1:nrow(dat)){
-      dat[j,i] <- ((as.numeric(dat[j,i]) - mean(as.numeric(dat[,i]), na.rm = T))/sd(as.numeric(dat[,i]), na.rm = T))
-      
-    }
-  }
-  return(dat)
-}
-
-
-
-
 ######
-RED <- function(dat, grp){
+RED = function(dat, grp){
   
   #####Now the function doesn't run at all#####
-  dat <- as.matrix(dat)
-  grp <- as.factor(grp)
+  dat = as.matrix(dat)
+  grp = as.factor(grp)
   if (!is.numeric(dat)){stop("dat must be numeric")}
   if (!is.factor(grp)){stop("grp must be a factor")}
   #if (is.null(dimnames(dat)[[2]])){dimnames(dat)[[2]] = paste("var", 1:ncol(dat), sep = ".")} ###try to add in better variable naming in the future
@@ -54,20 +14,20 @@ RED <- function(dat, grp){
   dat <- z.score(dat)
   
   #Calc largest group size
-  maxN <- max(table(grp))
+  maxN = max(table(grp))
   
   ##Array data as (individuals x groups x variables)
   ##Setting array extents to largest group size so array can be looped over. Values are ultimately averaged so NAs can be dropped
   
-  #####reshaping the data to this particular array might not be neccessary#####
+  #####reshaping the data to this particular array probably not necesary anyway#####
  
   m <- array(-100, c(maxN, length(levels(grp)), ncol(dat)))
   
-  dimnames(m) <- list(1:maxN, "grp" = levels(grp), "var"  = colnames(dat))
+  dimnames(m) = list(1:maxN, "grp" = levels(grp), "var"  = colnames(dat))
  
   for (g in 1:length(levels(grp))){
     for (i in 1:ncol(dat)){
-      if (table(grp)[g] == maxN){
+      if (table(grp)[g]==maxN){
         pad <- NULL} else{
           pad <- rep(NA, maxN - table(grp)[g])
         }
@@ -122,35 +82,3 @@ RED <- function(dat, grp){
   return(out)
   
 }
-
-red1 = RED(dat, grp)
-
-
-t.mat = matrix(data = NA, nrow = maxN, ncol = maxN)
-g.mat = array(data = NA, dim = length(levels(grp), length(levels(grp), ncol(dat))))
-for (t in 1:ncol(dat)){
-  for(g in 1:length(levels(grp))){
-    for (i in 1:maxN){
-      
-      t.mat[1:table(grp)[g],i] <- dat[as.integer(grp)==g,t][i] - dat[as.integer(grp)==g,t]
-      
-      if(i == maxN){ 
-        g.mat[] = mean(t.mat, na.rm = T)
-        t.mat = NA}
-      
-    }
-  }
-}
-
-####Default Plotting#####
-cluster<-hclust(as.dist(red1$RED.dist), method="ward.D2")
-
-clus2 = hclust(final, method = "ward.D2")
-
-plot(cluster)
-plot(clus2)
-table(cutree(cluster,length(levels(grp))),levels(grp))
-
-
-
-
