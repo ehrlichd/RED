@@ -186,7 +186,8 @@ RED.2 <- function(dat, grp){
   
 }
 
-red2 = RED.2(dat, grp)
+red2 = RED.2(dat[,2:12], dat$Ancestry)
+plot(hclust(red2$RED.dist, method = "ward.D2"))
 
 plot(hclust(red2$RED.dist, method = "ward.D"))
 

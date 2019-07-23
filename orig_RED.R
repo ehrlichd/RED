@@ -3,7 +3,7 @@
 #This is an example R-code for the forensic dataset used in the Robust Estimate of Grade Differences (RED)  A more generic function, that can be used on any R dataframe is being written at this time.
 
 attach(forensic2)
-teeth<-(forensic2)
+teeth<-(dat) ###DEE changed initial data source
 group<-10
 var<-11
 teeth2<-teeth
@@ -15,16 +15,16 @@ for (i in 2:ncol(teeth2)) {
 
 
 new<-(split(teeth2, factor(teeth2[,1])))
-g1<-as.data.frame(new$'TN AA')
-g2<-as.data.frame(new$'CA AA')
-g3<-as.data.frame(new$'NY AA')
-g4<-as.data.frame(new$'OH EA')
-g5<-as.data.frame(new$'TN EA')
-g6<-as.data.frame(new$'NY EA')
-g7<-as.data.frame(new$'NM HA')
-g8<-as.data.frame(new$'SF HA')
-g9<-as.data.frame(new$'CA HA')
-g10<-as.data.frame(new$'NY HA')
+g1<-as.data.frame(new$'TNAA') ###DEE removed spaces in data frame name
+g2<-as.data.frame(new$'CAAA')
+g3<-as.data.frame(new$'NYAA')
+g4<-as.data.frame(new$'OHEA')
+g5<-as.data.frame(new$'TNEA')
+g6<-as.data.frame(new$'NYEA')
+g7<-as.data.frame(new$'NMHA')
+g8<-as.data.frame(new$'SFHA')
+g9<-as.data.frame(new$'CAHA')
+g10<-as.data.frame(new$'NYHA')
 
 max<-max(nrow(g1),nrow(g2),nrow(g3),nrow(g4),nrow(g5),nrow(g6),nrow(g7),
          nrow(g8),nrow(g9),nrow(g10))
@@ -93,7 +93,8 @@ for (i in 1:group){
 final<-abs(diss)
 colnames(final)<-c("TN AA","CA AA","NY AA","OH EA","TN EA",
                    "NY EA","NM HA","SF HA","CA HA","NY AA")
-cluster<-agnes(final,diss="TRUE", method="ward")
+
+cluster<-cluster::agnes(final,diss="TRUE", method="ward") ##DEE add cluster::
 plot(cluster)
 cluster
 table(cutree(cluster,group),teeth2[,1])
