@@ -84,7 +84,8 @@ RED <- function(dat, grp){
   #####Calculate intergroup distance#####
   
   ##### vvv Section to improve vvv #####
-  ###loops iterate over data to ultimately summarize group differences. 
+  ###loops iterate over data to ultimately summarize group differences.
+  ##For each trait, for each combination of groups (g1, g1; g1, g2', g1, g3; etc), compare all the individuals
 
   
   store<-array(NA,c(maxN,maxN)) ##individual(n) x individual(l) comparison (can be within or between groups(j,k))
@@ -129,9 +130,12 @@ red1 = RED(dat, grp)
 
 
 ##### vvv DEE working on alternative calculation steps vvv #####
+maxN = 202
 
 t.mat = matrix(data = NA, nrow = maxN, ncol = maxN)
-g.mat = array(data = NA, dim = length(levels(grp), length(levels(grp), ncol(dat))))
+
+g.mat = array(data = NA, dim = c(length(levels(grp)), length(levels(grp)), ncol(dat)))
+
 for (t in 1:ncol(dat)){
   for(g in 1:length(levels(grp))){
     for (i in 1:maxN){
@@ -139,12 +143,16 @@ for (t in 1:ncol(dat)){
       t.mat[1:table(grp)[g],i] <- dat[as.integer(grp)==g,t][i] - dat[as.integer(grp)==g,t]
       
       if(i == maxN){ 
-        g.mat[] = mean(t.mat, na.rm = T)
+        g.mat[g,] = mean(t.mat, na.rm = T)
         t.mat = NA}
       
     }
   }
 }
+
+t.mat[1:table(grp)[1],1] <- dat[as.integer(grp)==1,1][1] - dat[as.integer(grp)==1,1]
+
+View(t.mat)
 
 ##### ^^^^^ alt workflow ^^^^ #####
 
