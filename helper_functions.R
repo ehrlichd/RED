@@ -35,6 +35,15 @@ z.score <- function(dat){
   return(dat)
 }
 
+pair.diff <- function(v1, v2){
+  mat = matrix(NA, nrow = length(v1), ncol = length(v2))
+  for (i in 1:length(v1)){
+    for (j in 1:length(v2)){
+      mat[i,j] <- v1[i]-v2[j]
+    }
+  }
+  return(mat)
+}
 
 
 
@@ -97,6 +106,8 @@ RED <- function(dat, grp){
     for (j in 1:length(levels(grp))){ #for each group (rows)
       for (k in 1:length(levels(grp))){ #for each group (column)
         for (l in 1:maxN){ #for ALL individuals (column)
+          
+          
           for (n in 1:maxN){ #for ALL individuals (rows)
             store[n,l]<- m[l,j,i]- m[n,k,i] #each cell of store represents individual-individual difference. 0s on diagonal. NAs ok.
             if ((n==maxN) & (l==maxN)) {hl[j,k,i]<-mean(store,na.rm=TRUE)} #when the store matrix is full (rows(n) == maxN & col(l) == maxN) calculate the average of the whole matrix and save it to 1 cell in hl
@@ -130,26 +141,58 @@ red1 = RED(dat, grp)
 
 
 ##### vvv DEE working on alternative calculation steps vvv #####
-maxN = 202
 
-t.mat = matrix(data = NA, nrow = maxN, ncol = maxN)
+RED.2 <- function(dat, grp){
+  
+  dat <- as.matrix(dat)
+  grp <- as.factor(grp)
+  if (!is.numeric(dat)){stop("dat must be numeric")}
+  if (!is.factor(grp)){stop("grp must be a factor")}
+  #if (is.null(dimnames(dat)[[2]])){dimnames(dat)[[2]] = paste("var", 1:ncol(dat), sep = ".")} ###try to add in better variable naming in the future
+  
+  
+  ##First step: standardize grades, Z-scores
+  
+  dat <- z.score(dat)
+  
+  gl = length(levels(grp)) #get number of groups
 
-g.mat = array(data = NA, dim = c(length(levels(grp)), length(levels(grp)), ncol(dat)))
-
-for (t in 1:ncol(dat)){
-  for(g in 1:length(levels(grp))){
-    for (i in 1:maxN){
-      
-      t.mat[1:table(grp)[g],i] <- dat[as.integer(grp)==g,t][i] - dat[as.integer(grp)==g,t]
-      
-      if(i == maxN){ 
-        g.mat[g,] = mean(t.mat, na.rm = T)
-        t.mat = NA}
-      
+  t.mat = array(dim = c(gl, gl, ncol(dat))) #this is analogous to hl
+  g.mat = array(dim = c(gl, gl)) #this is analogous to diss
+  
+  for (i in 1:ncol(dat)){
+    for(j in 1:gl){
+      for (k in 1:gl){
+        
+        t.mat[j,k,i] <- mean(pair.diff(dat[as.integer(grp)==j,i], dat[as.integer(grp)==k,i]), na.rm = T)
+        
+      }
     }
   }
+  
+  for (l in 1:gl){
+    for (n in 1:gl){
+      g.mat[n,l] <- abs(mean(t.mat[l,n,], na.rm = T))
+    }
+  }
+  
+  
+  final<- abs(g.mat)
+  colnames(final)<-levels(grp)
+  final = as.dist(final)
+  out = list("RED.dist" = final, "n.tab" = table(grp))
+  
+  return(out)
+  
 }
 
+red2 = RED.2(dat, grp)
+
+plot(hclust(red2$RED.dist, method = "ward.D"))
+
+
+t = pair.diff(t1,t2)
+View(t)
 t.mat[1:table(grp)[1],1] <- dat[as.integer(grp)==1,1][1] - dat[as.integer(grp)==1,1]
 
 View(t.mat)
@@ -157,9 +200,15 @@ View(t.mat)
 ##### ^^^^^ alt workflow ^^^^ #####
 
 ####Default Plotting#####
-cluster<-hclust(as.dist(red1$RED.dist), method="ward.D2")
+clus<-hclust(red1$RED.dist, method="ward.D2")
 
-clus2 = hclust(final, method = "ward.D2")
+class(clus)
+plot(as.dendrogram(clus), 
+     type = "rectangle",
+     horiz = F, 
+     nodePar = list (pch = c(1,16), col = "red"), 
+     edgePar = list(col = c("cyan", "blue"))
+     )
 
 plot(cluster)
 plot(clus2)
