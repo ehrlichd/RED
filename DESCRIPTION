@@ -1,0 +1,13 @@
+Package: RED
+Title: package for calculating Robust Estimator of grade Difference (RED)
+Version: 0.0.0.9000
+Authors: 
+    person(given = "Daniel",
+           family = "Ehrlich",
+           role = c("aut", "cre"),
+           email = "dan.ehrlich.e@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Package for calculating Robust Estimator of grade Difference (RED). Red works well with ordinal (grade) data and handles missing data, as well asunequal sample sizes.
+License: What license it uses
+Encoding: UTF-8
+LazyData: true
