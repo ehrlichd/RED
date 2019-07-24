@@ -24,11 +24,11 @@ str(dat)
 
 
 z.score <- function(dat){
-  dat <- as.matrix(dat)
+  #dat <- as.matrix(dat)
   
   for (i in 1:ncol(dat)){
     for (j in 1:nrow(dat)){
-      dat[j,i] <- ((as.numeric(dat[j,i]) - mean(as.numeric(dat[,i]), na.rm = T))/sd(as.numeric(dat[,i]), na.rm = T))
+      dat[j,i] <- (dat[j,i] - mean(dat[,i], na.rm = T))/(var(dat[,i], na.rm = T))**.5
       
     }
   }
@@ -73,6 +73,8 @@ RED <- function(dat, grp){
   m <- array(-100, c(maxN, length(levels(grp)), ncol(dat)))
   
   dimnames(m) <- list(1:maxN, "grp" = levels(grp), "var"  = colnames(dat))
+  
+  ###Arrange m and pad out missing values
  
   for (g in 1:length(levels(grp))){
     for (i in 1:ncol(dat)){
@@ -131,7 +133,7 @@ RED <- function(dat, grp){
   colnames(final)<-levels(grp)
   View(final)
   final = as.dist(final)
-  out = list("RED.dist" = final, "n.tab" = table(grp))
+  out = list("RED.dist" = final, "n.tab" = table(grp), "z.grades" = dat)
   
   return(out)
   
@@ -154,6 +156,8 @@ RED.2 <- function(dat, grp){
   ##First step: standardize grades, Z-scores
   
   dat <- z.score(dat)
+  
+  ####My arranged z.grades != m[,,], checking z.grades next step
   
   gl = length(levels(grp)) #get number of groups
 
@@ -179,14 +183,26 @@ RED.2 <- function(dat, grp){
   
   final<- abs(g.mat)
   colnames(final)<-levels(grp)
-  final = as.dist(final)
-  out = list("RED.dist" = final, "n.tab" = table(grp))
+  final <- as.dist(final)
+  out <- list("RED.dist" = final, "n.tab" = table(grp), "z.grades" = dat)
   
   return(out)
   
 }
 
 red2 = RED.2(dat[,2:12], dat$Ancestry)
+
+r2.m1 = array(dim = c(202,10,11))
+
+rm(i,j)
+for (j in 1:11){
+  for ( i in 1:10){
+    r2.m1[1:length(d[as.integer(grp)==i,j]),i,j] = d[as.integer(grp)==i,j]
+  }
+}
+View(r2.m1[,,1])
+
+
 plot(hclust(red2$RED.dist, method = "ward.D2"))
 
 plot(hclust(red2$RED.dist, method = "ward.D"))

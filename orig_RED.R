@@ -7,6 +7,8 @@ teeth<-(dat) ###DEE changed initial data source
 group<-10
 var<-11
 teeth2<-teeth
+
+
 #standardization loop#
 for (i in 2:ncol(teeth2)) {
   for (j in 1:nrow(teeth2)){
@@ -91,9 +93,21 @@ for (i in 1:group){
 
 
 final<-abs(diss)
-colnames(final)<-c("TN AA","CA AA","NY AA","OH EA","TN EA",
-                   "NY EA","NM HA","SF HA","CA HA","NY AA")
+colnames(final)<-c("TN AA","CA AA","NY AA","OH EA","TN EA", "NY EA","NM HA","SF HA","CA HA","NY HA")
 
+dimnames(m)[[2]] = c("TNAA","CAAA","NYAA","OHEA","TNEA", "NYEA","NMHA","SFHA","CAHA","NYHA")
+dimnames(r2.m1)[[2]] = levels(grp)
+
+t = cbind( levels(grp), c("TNAA","CAAA","NYAA","OHEA","TNEA", "NYEA","NMHA","SFHA","CAHA","NYHA"))
+
+
+View(round(m[,sort(t[,2]),1],4))
+View(round(r2.m1[,,1],4))
+View(t)
+sort(t[,2])
+
+comp = round(m,4) - round(r2.m1, 4)
+View(comp[,,1])
 cluster<-cluster::agnes(final,diss="TRUE", method="ward") ##DEE add cluster::
 plot(cluster)
 cluster
