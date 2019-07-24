@@ -10,7 +10,7 @@
 #'@return Nothing will happen
 
 
-plot.RED <- function(d, type = c("2D","3D", "tree"), labels = T){
+plot_RED <- function(d, type = c("2D","3D", "tree"), labels = T){
   if (class(d) != "dist"){stop("d must be a dist object")}
   if(type == "3D"){
     require(rgl)
