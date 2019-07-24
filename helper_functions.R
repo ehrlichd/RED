@@ -24,16 +24,18 @@ str(dat)
 
 
 z.score <- function(dat){
-  #dat <- as.matrix(dat)
+  dat <- as.matrix(dat)
+  t.dat <- dat
   
   for (i in 1:ncol(dat)){
     for (j in 1:nrow(dat)){
-      dat[j,i] <- (dat[j,i] - mean(dat[,i], na.rm = T))/(var(dat[,i], na.rm = T))**.5
+      t.dat[j,i] <- (dat[j,i] - mean(dat[,i], na.rm = T))/(sd(dat[,i], na.rm = T))
       
     }
   }
-  return(dat)
+  return(t.dat)
 }
+
 
 pair.diff <- function(v1, v2){
   mat = matrix(NA, nrow = length(v1), ncol = length(v2))
@@ -50,125 +52,30 @@ pair.diff <- function(v1, v2){
 ######
 RED <- function(dat, grp){
   
-  #####Now the function doesn't run at all#####
   dat <- as.matrix(dat)
   grp <- as.factor(grp)
   if (!is.numeric(dat)){stop("dat must be numeric")}
   if (!is.factor(grp)){stop("grp must be a factor")}
-  #if (is.null(dimnames(dat)[[2]])){dimnames(dat)[[2]] = paste("var", 1:ncol(dat), sep = ".")} ###try to add in better variable naming in the future
-  
-  
-  ##First step: Z-scores
-  
-  dat <- z.score(dat)
-  
-  #Calc largest group size
-  maxN <- max(table(grp))
-  
-  ##Array data as (individuals x groups x variables)
-  ##Setting array extents to largest group size so array can be looped over. Values are ultimately averaged so NAs can be dropped
-  
-  #####reshaping the data to this particular array might not be neccessary#####
- 
-  m <- array(-100, c(maxN, length(levels(grp)), ncol(dat)))
-  
-  dimnames(m) <- list(1:maxN, "grp" = levels(grp), "var"  = colnames(dat))
-  
-  ###Arrange m and pad out missing values
- 
-  for (g in 1:length(levels(grp))){
-    for (i in 1:ncol(dat)){
-      if (table(grp)[g] == maxN){
-        pad <- NULL} else{
-          pad <- rep(NA, maxN - table(grp)[g])
-        }
-      
-      
-      
-      m[1:maxN,g,i] <- append(dat[as.integer(grp)==g,i], pad)
-      
-     
-    }
-  }
-  
 
-  #####Calculate intergroup distance#####
-  
-  ##### vvv Section to improve vvv #####
-  ###loops iterate over data to ultimately summarize group differences.
-  ##For each trait, for each combination of groups (g1, g1; g1, g2', g1, g3; etc), compare all the individuals
-
-  
-  store<-array(NA,c(maxN,maxN)) ##individual(n) x individual(l) comparison (can be within or between groups(j,k))
-  reset<-array(NA,c(maxN,maxN)) 
-  hl<-array(NA,c(length(levels(grp)),length(levels(grp)),ncol(dat))) ##group (j) x group (k) x trait (i) 
-  diss<-matrix(NA,nrow=length(levels(grp)),ncol=length(levels(grp))) ##group x group 
-  
-  for (i in 1:ncol(dat)){ #for each variable
-    for (j in 1:length(levels(grp))){ #for each group (rows)
-      for (k in 1:length(levels(grp))){ #for each group (column)
-        for (l in 1:maxN){ #for ALL individuals (column)
-          
-          
-          for (n in 1:maxN){ #for ALL individuals (rows)
-            store[n,l]<- m[l,j,i]- m[n,k,i] #each cell of store represents individual-individual difference. 0s on diagonal. NAs ok.
-            if ((n==maxN) & (l==maxN)) {hl[j,k,i]<-mean(store,na.rm=TRUE)} #when the store matrix is full (rows(n) == maxN & col(l) == maxN) calculate the average of the whole matrix and save it to 1 cell in hl
-            if ((n==maxN) & (l==maxN)) {store<-reset} #reset, for next loop (increment groups)
-          }
-        }
-      }
-    }
-  }
-  
-
-  for (i in 1:length(levels(grp))){
-    for (j in 1:length(levels(grp))){
-      
-      diss[j,i]<-abs(mean(hl[j,i,])) ##averaging across traits
-    }
-    }
-  
-  
-  final<- abs(diss)
-  colnames(final)<-levels(grp)
-  View(final)
-  final = as.dist(final)
-  out = list("RED.dist" = final, "n.tab" = table(grp), "z.grades" = dat)
-  
-  return(out)
-  
-}
-
-red1 = RED(dat, grp)
-
-
-##### vvv DEE working on alternative calculation steps vvv #####
-
-RED.2 <- function(dat, grp){
-  
-  dat <- as.matrix(dat)
-  grp <- as.factor(grp)
-  if (!is.numeric(dat)){stop("dat must be numeric")}
-  if (!is.factor(grp)){stop("grp must be a factor")}
-  #if (is.null(dimnames(dat)[[2]])){dimnames(dat)[[2]] = paste("var", 1:ncol(dat), sep = ".")} ###try to add in better variable naming in the future
-  
   
   ##First step: standardize grades, Z-scores
   
   dat <- z.score(dat)
-  
-  ####My arranged z.grades != m[,,], checking z.grades next step
-  
-  gl = length(levels(grp)) #get number of groups
 
-  t.mat = array(dim = c(gl, gl, ncol(dat))) #this is analogous to hl
-  g.mat = array(dim = c(gl, gl)) #this is analogous to diss
+  gl = length(levels(grp)) #get number of groups
+  var = ncol(dat) #get number of variables
+
+  t.mat = array(dim = c(gl, gl, var))
+  g.mat = array(dim = c(gl, gl)) 
   
-  for (i in 1:ncol(dat)){
+  for (i in 1:var){
     for(j in 1:gl){
       for (k in 1:gl){
         
-        t.mat[j,k,i] <- mean(pair.diff(dat[as.integer(grp)==j,i], dat[as.integer(grp)==k,i]), na.rm = T)
+        t.mat[j,k,i] <- mean(
+          pair.diff(
+            dat[as.integer(grp)==j,i], 
+            dat[as.integer(grp)==k,i]), na.rm = T)
         
       }
     }
@@ -190,40 +97,94 @@ RED.2 <- function(dat, grp){
   
 }
 
-red2 = RED.2(dat[,2:12], dat$Ancestry)
-
-r2.m1 = array(dim = c(202,10,11))
-
-rm(i,j)
-for (j in 1:11){
-  for ( i in 1:10){
-    r2.m1[1:length(d[as.integer(grp)==i,j]),i,j] = d[as.integer(grp)==i,j]
-  }
-}
-View(r2.m1[,,1])
+red = RED(dat, grp)
 
 
 plot(hclust(red2$RED.dist, method = "ward.D2"))
+##matches results of original code
 
-plot(hclust(red2$RED.dist, method = "ward.D"))
-
-
-t = pair.diff(t1,t2)
-View(t)
-t.mat[1:table(grp)[1],1] <- dat[as.integer(grp)==1,1][1] - dat[as.integer(grp)==1,1]
-
-View(t.mat)
-
-##### ^^^^^ alt workflow ^^^^ #####
 
 ####Default Plotting#####
-clus<-hclust(red1$RED.dist, method="ward.D2")
 
+###2D###
+
+plot.tree <- function(dist, grp = NULL, horiz = F, ...){
+  
+}
+
+plot.mds <-function(dist, grp = NULL, dim = c(2,3),...){
+  
+  col = rainbow(length(levels(as.factor(grp))), s=.4)
+  
+  if (dim == 3){
+    d = cmdscale(distm, k=3)
+    plot3d(d, type = "n")
+    for (i in length(dist))
+    points3d(d)
+  }
+  
+}
+
+clus<-hclust(red2$RED.dist, method="ward.D2")
+
+mds.2 = cmdscale(red2$RED.dist, k=2) 
+mds.3 = cmdscale(red2$RED.dist, k=3)
+plot(mds.2, pch = 16)
+text(mds.2, labels = levels(grp))
+
+plot(princomp(z.score(dat))$scores)
+
+r = range(mds.3)
+plot3d(mds.3)
+text3d(mds.3, texts = levels(grp))
+dimnames(mds.2)
+colors = c(NY = "red", CA = "blue", TN = "green", OH = "cyan", SF = "magenta")
+ord = order.dendrogram(dend)
+grp[[2]]
+
+colors = c("red", "blue","green")
+
+colors = rainbow(10)
+
+t = as.matrix(cbind(levels(grp), colors))
+labelCol <- function(x) {
+  
+  if (is.leaf(x)) {
+    
+    ## fetch label - works for coloring by an aspect of the labels
+    label <- attr(x, "label")
+    #code <- substr(label, 1, 2)
+    
+    ##fetch order?
+    #ord <- attr(x, "order")
+    
+    #Use following line to reset labels to abbriavation (grouping)
+    # attr(x, "label") <- code
+    attr(x, "nodePar") <- list(lab.col = t[label,])
+    
+    }
+  return(x)
+}
+
+d = dendrapply(dend, labelCol)
+dend = as.dendrogram(clus)
+plot(d)
+dend[[2]]
+attr(dend, "label")
+
+attributes(dend[[2]][[2]][[2]])
+
+labels(dend)
+attributes(dend)
+attr(dend, "nodePar") <- list(lab.col = rep(c("blue", "red"), 2))
+plot(dend)
 class(clus)
+is.leaf()
+
 plot(as.dendrogram(clus), 
      type = "rectangle",
      horiz = F, 
-     nodePar = list (pch = c(1,16), col = "red"), 
+     nodePar = list (pch = c(1,16), col = "red", label = "blue"), 
      edgePar = list(col = c("cyan", "blue"))
      )
 
