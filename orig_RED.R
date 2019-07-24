@@ -3,11 +3,13 @@
 #This is an example R-code for the forensic dataset used in the Robust Estimate of Grade Differences (RED)  A more generic function, that can be used on any R dataframe is being written at this time.
 
 attach(forensic2)
-teeth<-(dat) ###DEE changed initial data source
+teeth<-read.csv("forensic.csv") ###DEE changed initial data source
+teeth = dat
 group<-10
 var<-11
 teeth2<-teeth
 
+View(teeth)
 
 #standardization loop#
 for (i in 2:ncol(teeth2)) {
@@ -108,6 +110,7 @@ sort(t[,2])
 
 comp = round(m,4) - round(r2.m1, 4)
 View(comp[,,1])
+
 cluster<-cluster::agnes(final,diss="TRUE", method="ward") ##DEE add cluster::
 plot(cluster)
 cluster

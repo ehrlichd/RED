@@ -8,10 +8,14 @@
 #'that can be used on any R dataframe is being written at this time.#
 
 
+
+###7-24 debug, red.2 and original code prudicing difference results
+
+
 ##Read in test data set from forensic
 
 dat = (read.csv("forensic.csv"))
-
+View(dat)
 ##reclass 99 as NA
 dat[dat==99] = NA 
 
@@ -24,16 +28,20 @@ str(dat)
 
 
 z.score <- function(dat){
-  #dat <- as.matrix(dat)
-  
+  dat <- as.matrix(dat)
+  t.dat <- dat
   for (i in 1:ncol(dat)){
     for (j in 1:nrow(dat)){
-      dat[j,i] <- (dat[j,i] - mean(dat[,i], na.rm = T))/(var(dat[,i], na.rm = T))**.5
+      t.dat[j,i] <- (dat[j,i] - mean(dat[,i], na.rm = T))/(var(dat[,i], na.rm = T))**.5
       
     }
   }
-  return(dat)
+  return(t.dat)
 }
+
+
+dat2 = z.score(dat[2:12])
+View(dat2)
 
 pair.diff <- function(v1, v2){
   mat = matrix(NA, nrow = length(v1), ncol = length(v2))
@@ -144,6 +152,8 @@ red1 = RED(dat, grp)
 
 ##### vvv DEE working on alternative calculation steps vvv #####
 
+
+
 RED.2 <- function(dat, grp){
   
   dat <- as.matrix(dat)
@@ -191,6 +201,7 @@ RED.2 <- function(dat, grp){
 }
 
 red2 = RED.2(dat[,2:12], dat$Ancestry)
+
 
 r2.m1 = array(dim = c(202,10,11))
 
