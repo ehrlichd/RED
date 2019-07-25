@@ -1,6 +1,6 @@
 #' Calculate pairwise difference between two vectors
 #'
-#' Calculate pairwise differenec (0 on diagonals) between any two vectors.
+#' Calculate pairwise differenec between any two vectors. Calculating on the same vector twice will produce a symmetrical matrix with 0s on the diagonal
 #'
 #' @param v1 A numeric vector
 #' @param v2 A numeric vector
@@ -10,6 +10,12 @@
 #' @keywords
 #'
 #' @export
+#'
+#' @examples
+#' a <- 1:10
+#' b <- 5:15
+#'
+#' pair.diff(a,b)
 
 
 pair.diff <- function(v1, v2){

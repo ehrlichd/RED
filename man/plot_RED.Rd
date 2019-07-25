@@ -4,7 +4,7 @@
 \alias{plot_RED}
 \title{Plot dist objcect as dendrogram}
 \usage{
-plot_RED(d, type = c("2D", "3D", "tree"), labels = T)
+plot_RED(d, type = c("2D", "3D", "tree"), labels = T, ...)
 }
 \arguments{
 \item{d}{A distance object}
@@ -12,10 +12,30 @@ plot_RED(d, type = c("2D", "3D", "tree"), labels = T)
 \item{type}{The type of plot to make: 2D Scatterplot, 3D Scatterplot, Dendrogram}
 
 \item{labels}{Logical value indicating whether data point should be labeled}
+
+\item{...}{Additional arguments to pass to plot/plot3D}
 }
 \value{
 Nothing will happen
 }
 \description{
-Plot the result of RED() (or any dist object) as a dendrogram. Increased functionality to come
+Plot the result of RED() (or any dist object) in a variety of ways. For scatter plots, Multidimensional scaling (cmdscale()) is used to visualize the distance matrix, for dendrograms, Ward's clustering is used hclust(method = "ward.D2").
+}
+\examples{
+#Create sample data
+dat1 <- matrix(rnorm(100, mean = 7.5, sd = 1), nrow = 100, ncol = 10)
+dat2 <- matrix(rnorm(100, mean = 2.5, sd = 2), nrow = 100, ncol = 10)
+dat3 <- matrix(rnorm(100, mean = 4, sd = 1), nrow = 100, ncol = 10)
+
+dat <- rbind(dat1, dat2, dat3)
+grp <- rep(c("A","B","C"), each = 100)
+
+#Calculate distance matrix
+dis <- RED(dat, grp)
+
+#Visualize
+plot_RED(dis, type = "2D")
+
+
+
 }

@@ -2,4 +2,5 @@
 
 export(RED)
 export(pair.diff)
+export(plot_RED)
 export(z.score)

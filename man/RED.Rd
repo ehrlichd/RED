@@ -4,17 +4,35 @@
 \alias{RED}
 \title{Calculate RED distance matrix}
 \usage{
-RED(dat, grp)
+RED(dat, grp, dis.only = TRUE)
 }
 \arguments{
 \item{dat}{A data matrix containing observations (rows) of variables(columns)}
 
 \item{grp}{A grouping vector to compare the observations}
+
+\item{dis.only}{Logical value indicating whether only the distance matrix is or a list containing the distance matrix, table of group sample sizes, and standardized z-scores.}
 }
 \value{
-output Returns a list containing the distance matrix, table of group sample sizes, and standardized z-scores.
+Depending on dis.only, RED() returns either a distance matrix only (dis.only = TRUE) or a list containing group sample size and standardized z-scores in addition to the distance matrix
 }
 \description{
 Calculate RED (Robust Estimator of grade Difference) on a set of ordinal or continuous data. Data are first standardized by mean and sd before pairwise differences are calculated within and between groups.
+}
+\examples{
+
+#Create sample data
+dat1 <- matrix(rnorm(100, mean = 7.5, sd = 1), nrow = 100, ncol = 10)
+dat2 <- matrix(rnorm(100, mean = 2.5, sd = 2), nrow = 100, ncol = 10)
+dat3 <- matrix(rnorm(100, mean = 4, sd = 1), nrow = 100, ncol = 10)
+
+dat <- rbind(dat1, dat2, dat3)
+grp <- rep(c("A","B","C"), each = 100)
+
+#Calculate distance matrix
+dis <- RED(dat, grp)
+
+#Visualize
+plot_RED(dis, type = "2D")
 }
 \keyword{}

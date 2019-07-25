@@ -4,14 +4,31 @@
 #'
 #' @param dat A data matrix containing observations (rows) of variables(columns)
 #' @param grp A grouping vector to compare the observations
+#' @param dis.only Logical value indicating whether only the distance matrix is or a list containing the distance matrix, table of group sample sizes, and standardized z-scores.
 #'
-#' @return output Returns a list containing the distance matrix, table of group sample sizes, and standardized z-scores.
+#' @return Depending on dis.only, RED() returns either a distance matrix only (dis.only = TRUE) or a list containing group sample size and standardized z-scores in addition to the distance matrix
 #'
 #' @keywords
 #'
 #' @export
+#'
+#' @examples
+#'
+#' #Create sample data
+#' dat1 <- matrix(rnorm(100, mean = 7.5, sd = 1), nrow = 100, ncol = 10)
+#' dat2 <- matrix(rnorm(100, mean = 2.5, sd = 2), nrow = 100, ncol = 10)
+#' dat3 <- matrix(rnorm(100, mean = 4, sd = 1), nrow = 100, ncol = 10)
+#'
+#' dat <- rbind(dat1, dat2, dat3)
+#' grp <- rep(c("A","B","C"), each = 100)
+#'
+#'#Calculate distance matrix
+#' dis <- RED(dat, grp)
+#'
+#'#Visualize
+#' plot_RED(dis, type = "2D")
 
-RED <- function(dat, grp){
+RED <- function(dat, grp, dis.only=TRUE){
 
   dat <- as.matrix(dat)
   grp <- as.factor(grp)
@@ -52,7 +69,10 @@ RED <- function(dat, grp){
   final<- abs(g.mat)
   colnames(final)<-levels(grp)
   final <- as.dist(final)
-  out <- list("RED.dist" = final, "n.tab" = table(grp), "z.grades" = dat)
+
+  if (dis.only ==TRUE){
+    out <- final
+    } else {out <- list("RED.dist" = final, "n.tab" = table(grp), "z.grades" = dat)}
 
   return(out)
 

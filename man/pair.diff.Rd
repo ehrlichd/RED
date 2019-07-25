@@ -15,6 +15,12 @@ pair.diff(v1, v2)
 Returns symmetrical pairwise difference between vectors
 }
 \description{
-Calculate pairwise differenec (0 on diagonals) between any two vectors.
+Calculate pairwise differenec between any two vectors. Calculating on the same vector twice will produce a symmetrical matrix with 0s on the diagonal
+}
+\examples{
+a <- 1:10
+b <- 5:15
+
+pair.diff(a,b)
 }
 \keyword{}

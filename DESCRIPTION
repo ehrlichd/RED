@@ -8,11 +8,11 @@ Authors@R:
            email = "dan.ehrlich.e@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: Package for calculating Robust Estimator of grade Difference 
-    (RED). Red works well with ordinal (grade) data and handles missing 
-    data, as well as unequal sample sizes.
-License: What license it uses
+    (RED). RED is a nonparametric method that avoids data compression and 
+    allows missing data.
+License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Imports:
-Depends: rgl, stats, R (>= 3.2.0)
+Imports: graphics, stats, utils
+Depends: rgl, R (>= 3.2.0)
