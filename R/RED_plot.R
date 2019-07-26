@@ -1,48 +1,18 @@
 #'Plot dist objcect as dendrogram
 #'
-#'Plot the result of RED() (or any dist object) in a variety of ways. For scatter plots, Multidimensional scaling (cmdscale()) is used to visualize the distance matrix, for dendrograms, Ward's clustering is used hclust(method = "ward.D2").
+#'Plot the result of \code{\link{RED_dist}} (or any dist object) in a variety of ways. For scatter plots, Multidimensional scaling (cmdscale()) is used to visualize the distance matrix, for dendrograms, Ward's clustering is used hclust(method = "ward.D2").
 #'
 #' @param d A distance object
 #' @param type The type of plot to make: 2D Scatterplot, 3D Scatterplot, Dendrogram
 #' @param labels Logical value indicating whether data point should be labeled
 #' @param ... Additional arguments to pass to plot/plot3D
 #' @export
-#' @return Nothing will happen
-#'
-#' @examples
-#' #with Forensic dataset
-#'
-#' data(forensic) #load sample data
-#'
-#' str(forensic) #check the structure of the data
-#' grades <- forensic[,2:12] #asign the grades to an object
-#' groups <- forensic[,1] #assign the grouping factor to another
-#'
-#' red1 <- RED(grades, groups, dis.only = TRUE)
-#'
-#' plot_RED(red1, type = "tree")
 #'
 #'
-#'
-#' #Create sample data
-#' dat1 <- matrix(rnorm(100, mean = 7.5, sd = 1), nrow = 100, ncol = 10)
-#' dat2 <- matrix(rnorm(100, mean = 2.5, sd = 2), nrow = 100, ncol = 10)
-#' dat3 <- matrix(rnorm(100, mean = 4, sd = 1), nrow = 100, ncol = 10)
-#'
-#' dat <- rbind(dat1, dat2, dat3)
-#' grp <- rep(c("A","B","C"), each = 100)
-#'
-#'#Calculate distance matrix
-#' dis <- RED(dat, grp)
-#'
-#'#Visualize
-#' plot_RED(dis, type = "2D")
+#' @seealso \code{\link{RED_dist}}
 #'
 #'
-#'
-
-
-plot_RED <- function(d, type = c("2D","3D", "tree"), labels = T, ...){
+RED_plot <- function(d, type = c("2D","3D", "tree"), labels = T, ...){
   if (class(d) != "dist"){stop("d must be a dist object")}
   if (length(type) != 1){stop("'type' must be one of:c( '2D', '3D', 'tree')")}
 

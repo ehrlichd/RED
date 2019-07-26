@@ -1,4 +1,4 @@
-#' @name RED-package
+#' @name RED
 #' @docType package
 #'
 #' @title Robust Estimator of grade Difference (RED)

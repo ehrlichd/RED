@@ -23,9 +23,9 @@
 #' grades <- forensic[,2:12] #asign the grades to an object
 #' groups <- forensic[,1] #assign the grouping factor to another
 #'
-#' red1 <- RED(grades, groups, dis.only = TRUE)
+#' red1 <- RED_dist(grades, groups, dis.only = TRUE)
 #'
-#' plot_RED(red1, type = "tree")
+#' RED_plot(red1, type = "tree")
 #'
 #'
 #'
@@ -38,12 +38,12 @@
 #' grp <- rep(c("A","B","C"), each = 100)
 #'
 #'#Calculate distance matrix
-#' dis <- RED(dat, grp)
+#' dis <- RED_dist(dat, grp)
 #'
 #'#Visualize
-#' plot_RED(dis, type = "2D")
+#' RED_plot(dis, type = "2D")
 
-RED <- function(dat, grp, dis.only=TRUE){
+RED_dist <- function(dat, grp, dis.only=TRUE){
 
   dat <- as.matrix(dat)
   grp <- as.factor(grp)
