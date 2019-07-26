@@ -17,11 +17,11 @@ Open Rstudio:
 ![alt text](https://github.com/ehrlichd/RED/blob/master/images/gitDL.png)
 
 Open Rstudio: 
-Tools > Install Packages Install from:
-    Click the dropdown to change "Repository (CRAN)" to
-    "Package Archive File (.zip; .tar.gz)
+1. Tools > Install Packages Install from:
+2. Click the first dropdown,change: 
+    *"Repository (CRAN)"* to **"Package Archive File (.zip; .tar.gz)"**
     
-     Navigate to the .tar.gz
+3. Navigate to the .tar.gz
 
 ![alt text](https://github.com/ehrlichd/RED/blob/master/images/Rinstall.png)
 ### References:
