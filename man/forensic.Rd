@@ -4,6 +4,9 @@
 \name{forensic}
 \alias{forensic}
 \title{Forensic sample of dental non-metric trait scores}
+\usage{
+data(forensic)
+}
 \description{
 Forensic sample of dental non-metric trait scores
 }

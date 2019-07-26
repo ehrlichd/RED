@@ -22,6 +22,20 @@ Nothing will happen
 Plot the result of RED() (or any dist object) in a variety of ways. For scatter plots, Multidimensional scaling (cmdscale()) is used to visualize the distance matrix, for dendrograms, Ward's clustering is used hclust(method = "ward.D2").
 }
 \examples{
+#with Forensic dataset
+
+data(forensic) #load sample data
+
+str(forensic) #check the structure of the data
+grades <- forensic[,2:12] #asign the grades to an object
+groups <- forensic[,1] #assign the grouping factor to another
+
+red1 <- RED(grades, groups, dis.only = TRUE)
+
+plot_RED(red1, type = "tree")
+
+
+
 #Create sample data
 dat1 <- matrix(rnorm(100, mean = 7.5, sd = 1), nrow = 100, ncol = 10)
 dat2 <- matrix(rnorm(100, mean = 2.5, sd = 2), nrow = 100, ncol = 10)

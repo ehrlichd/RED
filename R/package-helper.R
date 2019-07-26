@@ -24,7 +24,7 @@ NULL
 #' @docType data
 #'
 #' @keywords datasets
-#'
+#' @usage data(forensic)
 #'
 #' @examples
 #' data(forensic)
