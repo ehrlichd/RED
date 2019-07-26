@@ -15,7 +15,7 @@ image
 
 ### Alternative Install: 
 
-Downlaod the .tzr.gz file
+[Downlaod the .tzr.gz file](RED_0.0.0.9000.tar.gz)
 
 Open Rstudio: 
 Tools > Install Packages Install from:
