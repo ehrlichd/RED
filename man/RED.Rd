@@ -35,4 +35,3 @@ dis <- RED(dat, grp)
 #Visualize
 plot_RED(dis, type = "2D")
 }
-\keyword{}

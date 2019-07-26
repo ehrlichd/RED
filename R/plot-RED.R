@@ -2,14 +2,14 @@
 #'
 #'Plot the result of RED() (or any dist object) in a variety of ways. For scatter plots, Multidimensional scaling (cmdscale()) is used to visualize the distance matrix, for dendrograms, Ward's clustering is used hclust(method = "ward.D2").
 #'
-#'@param d A distance object
-#'@param type The type of plot to make: 2D Scatterplot, 3D Scatterplot, Dendrogram
-#'@param labels Logical value indicating whether data point should be labeled
-#'@param ... Additional arguments to pass to plot/plot3D
-#'@export
-#'@return Nothing will happen
+#' @param d A distance object
+#' @param type The type of plot to make: 2D Scatterplot, 3D Scatterplot, Dendrogram
+#' @param labels Logical value indicating whether data point should be labeled
+#' @param ... Additional arguments to pass to plot/plot3D
+#' @export
+#' @return Nothing will happen
 #'
-#'@examples
+#' @examples
 #' #Create sample data
 #' dat1 <- matrix(rnorm(100, mean = 7.5, sd = 1), nrow = 100, ncol = 10)
 #' dat2 <- matrix(rnorm(100, mean = 2.5, sd = 2), nrow = 100, ncol = 10)

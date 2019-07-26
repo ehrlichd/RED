@@ -15,4 +15,3 @@ output Returns a vector of z-scores
 \description{
 Rescale a vector based on the mean, sd of the data.
 }
-\keyword{}

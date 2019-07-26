@@ -23,4 +23,3 @@ b <- 5:15
 
 pair.diff(a,b)
 }
-\keyword{}

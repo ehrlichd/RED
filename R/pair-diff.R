@@ -7,7 +7,7 @@
 #'
 #' @return Returns symmetrical pairwise difference between vectors
 #'
-#' @keywords
+#'
 #'
 #' @export
 #'

@@ -6,7 +6,7 @@
 #'
 #' @return output Returns a vector of z-scores
 #'
-#' @keywords
+#'
 #'
 #' @export
 

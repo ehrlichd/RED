@@ -8,7 +8,7 @@
 #'
 #' @return Depending on dis.only, RED() returns either a distance matrix only (dis.only = TRUE) or a list containing group sample size and standardized z-scores in addition to the distance matrix
 #'
-#' @keywords
+#'
 #'
 #' @export
 #'
