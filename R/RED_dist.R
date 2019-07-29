@@ -53,7 +53,7 @@ RED_dist <- function(dat, grp, dis.only=TRUE){
 
   ##First step: standardize grades, Z-scores
 
-  dat <- z.score(dat)
+  dat <- RED_zscore(dat)
 
   gl = length(levels(grp)) #get number of groups
   var = ncol(dat) #get number of variables
@@ -66,7 +66,7 @@ RED_dist <- function(dat, grp, dis.only=TRUE){
       for (k in 1:gl){
 
         t.mat[j,k,i] <- mean(
-          pair.diff(
+          RED_pairdiff(
             dat[as.integer(grp)==j,i],
             dat[as.integer(grp)==k,i]), na.rm = T)
 

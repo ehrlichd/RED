@@ -4,21 +4,11 @@
 \name{forensic}
 \alias{forensic}
 \title{Forensic sample of dental non-metric trait scores}
+\format{An object of class \code{data.frame} with 877 rows and 12 columns.}
 \usage{
 data(forensic)
 }
 \description{
 Forensic sample of dental non-metric trait scores
-}
-\examples{
-data(forensic)
-
-
-dimnames(forensic)
-
-grp <- forensic [,1]
-dat <- forensic [,2:12]
-
-forensic
 }
 \keyword{datasets}

@@ -1,5 +1,7 @@
-#' @name RED
+#' @name RED-package
 #' @docType package
+#'
+#' @aliases RED
 #'
 #' @title Robust Estimator of grade Difference (RED)
 #' @author Daniel E. Ehrlich (package); Daniels, J., McKean, J., Willermet, C., Edgar, H. (method)
@@ -26,16 +28,5 @@ NULL
 #' @keywords datasets
 #' @usage data(forensic)
 #'
-#' @examples
-#' data(forensic)
-#'
-#'
-#' dimnames(forensic)
-#'
-#' grp <- forensic [,1]
-#' dat <- forensic [,2:12]
-#'
-#' forensic
-NULL
 
-
+"forensic"

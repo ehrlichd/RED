@@ -15,10 +15,10 @@
 #' a <- 1:10
 #' b <- 5:15
 #'
-#' pair.diff(a,b)
+#' RED_pairdiff(a,b)
 
 
-pair.diff <- function(v1, v2){
+RED_pairdiff <- function(v1, v2){
   mat = matrix(NA, nrow = length(v1), ncol = length(v2))
   for (i in 1:length(v1)){
     for (j in 1:length(v2)){

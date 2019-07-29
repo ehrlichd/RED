@@ -10,7 +10,7 @@
 #'
 #' @export
 
-z.score <- function(dat){
+RED_zscore <- function(dat){
   dat <- as.matrix(dat)
   t.dat <- dat
 
