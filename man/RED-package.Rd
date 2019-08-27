@@ -6,7 +6,7 @@
 \alias{RED}
 \title{Robust Estimator of grade Difference (RED)}
 \description{
-Package of functions for calculating and visualizing Robust Estimator of grade Difference (RED). RED is a nonparametric method that avoids data compression and allows missing data.
+Package of functions for calculating and visualizing Robust Estimator of grade Difference (RED). RED is a nonparametric method that avoids data compression and allows missing data. Please send any comments, or questions to robustestimator@gmail.com
 }
 \references{
 (2018) Daniels, J., McKean, J., Willermet, C., Edgar, H., Robust Estimator of Grade Differences: a new statistical solution to an old categorical data problem, Chapter 4, Cambridge University Press.
