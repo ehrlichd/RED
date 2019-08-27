@@ -3,6 +3,8 @@ R package for Robust Estimator of grade Difference (RED)
 
 This nonparametric method, Robust Estimator of Grade Differences (RED), avoids data compression and allows for missing data. It performs comparably or better to other distance statistics (Mean Measure of Divergence, Mahanobis Distance).
 
+**Note:** Make sure you install/update both [R](https://cran.r-project.org/) and [Rstudio] (https://www.rstudio.com/products/rstudio/download/#download) prior to loading RED.
+
 ### To Install:
 Open Rstudio, run the following code in console:
 
@@ -10,7 +12,7 @@ Open Rstudio, run the following code in console:
 
 <code>devtools::install_github("ehrlichd/RED") </code>
 
-**Note:** Make sure you install/update both [R](https://cran.r-project.org/) and [Rstudio] (https://www.rstudio.com/products/rstudio/download/#download) prior to loading RED.
+
 
 ### Alternative Install: 
 
