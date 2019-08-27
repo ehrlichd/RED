@@ -10,9 +10,7 @@
 #'
 #'
 #' @import rgl
-#' @import stats
-#' @import utils
-#' @import graphics
+#'
 #'
 #'
 #' @references (2018) Daniels, J., McKean, J., Willermet, C., Edgar, H., Robust Estimator of Grade Differences: a new statistical solution to an old categorical data problem, Chapter 4, Cambridge University Press.
