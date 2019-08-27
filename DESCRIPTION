@@ -1,12 +1,8 @@
 Package: RED
 Title: Robust Estimator of grade Difference (RED)
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "Daniel",
-           family = "Ehrlich",
-           role = c("aut", "cre"),
-           email = "dan.ehrlich.e@gmail.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+Authors: John Daniels, J. McKean, Daniel E. Ehrlich, Cathy Willermet, Heather Edgar
+Maintainer: Daniel E. Ehrlich <robustestimator@gmail.com>
 Description: Package of functions for calculating and visualizing Robust Estimator 
     of grade Difference (RED). RED is a nonparametric method that avoids data compression and 
     allows missing data.
