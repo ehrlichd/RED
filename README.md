@@ -16,7 +16,7 @@ Open Rstudio, run the following code in console:
 
 [Downlaod the .tzr.gz file](RED_0.0.0.9000.tar.gz)
 
-![alt text](https://github.com/ehrlichd/RED/tree/master/images/gitDL.png)
+![](https://github.com/ehrlichd/RED/blob/master/images/gitDL.png)
 
 Open Rstudio: 
 1. Tools > Install Packages Install from:
@@ -25,7 +25,7 @@ Open Rstudio:
     
 3. Navigate to the .tar.gz
 
-![alt text](https://github.com/ehrlichd/RED/tree/master/images/Rinstall.png)
+![](https://github.com/ehrlichd/RED/blob/master/images/Rinstall.png)
 ### References:
 
 (2018) Daniels, J., McKean, J., Willermet, C., Edgar, H., Robust Estimator of Grade Differences: a new statistical solution to an old categorical data problem, Chapter 4, Cambridge University Press.
