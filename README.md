@@ -5,7 +5,7 @@ This nonparametric method, Robust Estimator of Grade Differences (RED), avoids d
 
 While RED was developed for use with ordinal (graded) data, it can be calculated on any multivariate data be it ordinal, interval, or continuous. All you need in your dataset are 2+ variables with some kind of logical ranking and 2+ groups.
 
-**Note:** Make sure you install/update both [R](https://cran.r-project.org/) and [Rstudio] (https://www.rstudio.com/products/rstudio/download/#download) prior to loading RED.
+**Note:** Make sure you install/update both [R](https://cran.r-project.org/) and [Rstudio](https://www.rstudio.com/products/rstudio/download/#download) prior to loading RED.
 
 ### To Install:
 Open Rstudio, run the following code in console:
