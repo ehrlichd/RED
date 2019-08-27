@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 ^RED\images$
 ^RED\installers$
+^images$
+^installers$
