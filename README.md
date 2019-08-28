@@ -11,7 +11,7 @@ While RED was developed for use with ordinal (graded) data, it can be calculated
 Open Rstudio, run the following code in console:
 
 ```{R}
-install.packages("devtools")</code>
+install.packages("devtools")
 devtools::install_github("ehrlichd/RED")
 ```
 
