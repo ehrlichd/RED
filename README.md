@@ -10,13 +10,27 @@ While RED was developed for use with ordinal (graded) data, it can be calculated
 ### To Install:
 Open Rstudio, run the following code in console:
 
-<code>install.packages("devtools")</code>
+```{R}
+install.packages("devtools")</code>
+devtools::install_github("ehrlichd/RED")
+```
 
-<code>devtools::install_github("ehrlichd/RED") </code>
+**Note:** Installing RED also installs [rgl](https://CRAN.R-project.org/package=rgl), a power package for plotting data in 3 dimensions. This package contains >50 dependent packages which must be installed before you can use RED.  You may see a wall of text in the console while R installs these dependencies. **Do not worry*** these files only take up ~250 MB and this installation process needs to happen **only once.**
 
+
+Think of installing packages as adding a book (package) to your R Library. Once you take the time to get the book into your library (installing it) you only need to pull it off the shelf to read it.
+
+
+To "read" a package from your library, use:
+```{R}
+library(RED)
+```
+**Note:** While the install() calls required " " around package names, library() does not!
 
 
 ### Alternative Install: 
+
+**Note:** RED requires the [rgl](https://CRAN.R-project.org/package=rgl) package to produce 3D scatter plots. Please ensure rgl is installed prior to following the **Alternative Installation.** 
 
 [Downlaod the .tzr.gz file](RED_0.0.0.9000.tar.gz)
 
