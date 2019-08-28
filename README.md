@@ -18,10 +18,10 @@ devtools::install_github("ehrlichd/RED")
 **Note:** Installing RED also installs [rgl](https://CRAN.R-project.org/package=rgl), a power package for plotting data in 3 dimensions. This package contains >50 dependent packages which must be installed before you can use RED.  You may see a wall of text in the console while R installs these dependencies. **Do not worry*** these files only take up ~250 MB and this installation process needs to happen **only once.**
 
 
-Think of installing packages as adding a book (package) to your R Library. Once you take the time to get the book into your library (installing it) you only need to pull it off the shelf to read it.
+Think of installing packages as adding a book (package) to your R Library. Once you take the time to get the book into your library (installing it) you only reading (loading) it is a snap.
 
 
-To "read" a package from your library, use:
+To "read" (load) a package from your library, use:
 ```{R}
 library(RED)
 ```
