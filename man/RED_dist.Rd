@@ -24,29 +24,33 @@ Calculate RED (Robust Estimator of grade Difference) on a set of ordinal or cont
 
 #with Forensic dataset
 
-data(forensic) #load sample data
-
-str(forensic) #check the structure of the data
-grades <- forensic[,2:12] #asign the grades to an object
-groups <- forensic[,1] #assign the grouping factor to another
-
-red1 <- RED_dist(grades, groups, dis.only = TRUE)
-
-RED_plot(red1, type = "tree")
+dat1 <- forensic #load sample data
 
 
+grades1 <- dat1[,2:12] #asign the grades to an object
+groups1 <- dat1[,1] #assign the grouping factor to another
 
-#Create sample data
-dat1 <- matrix(rnorm(100, mean = 7.5, sd = 1), nrow = 100, ncol = 10)
-dat2 <- matrix(rnorm(100, mean = 2.5, sd = 2), nrow = 100, ncol = 10)
-dat3 <- matrix(rnorm(100, mean = 4, sd = 1), nrow = 100, ncol = 10)
-
-dat <- rbind(dat1, dat2, dat3)
-grp <- rep(c("A","B","C"), each = 100)
-
-#Calculate distance matrix
-dis <- RED_dist(dat, grp)
+dis1 <- RED_dist(grades1, groups1, dis.only = TRUE)
 
 #Visualize
-RED_plot(dis, type = "2D")
+RED_plot(dis1, type = "tree")
+
+
+RED_plot(dis1, type = "3D", col = rainbow(length(labels(dis1))), size = 10)
+
+#Create sample data
+dat.a <- matrix(rnorm(100, mean = 7.5, sd = 1), nrow = 100, ncol = 10)
+dat.b <- matrix(rnorm(100, mean = 2.5, sd = 2), nrow = 100, ncol = 10)
+dat.c <- matrix(rnorm(100, mean = 4, sd = 1), nrow = 100, ncol = 10)
+
+dat2 <- rbind(dat.a, dat.b, dat.c)
+grp2 <- rep(c("A","B","C"), each = 100)
+
+#Calculate distance matrix
+dis2 <- RED_dist(dat2, grp2)
+
+#Visualize
+RED_plot(dis2, type = "2D", pch = 15:17, col = 3:5)
+
+
 }

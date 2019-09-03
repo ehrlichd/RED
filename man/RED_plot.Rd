@@ -2,21 +2,21 @@
 % Please edit documentation in R/RED_plot.R
 \name{RED_plot}
 \alias{RED_plot}
-\title{Plot dist objcect as dendrogram}
+\title{Visualize distance object}
 \usage{
 RED_plot(d, type = c("2D", "3D", "tree"), labels = T, ...)
 }
 \arguments{
 \item{d}{A distance object}
 
-\item{type}{The type of plot to make: 2D Scatterplot, 3D Scatterplot, Dendrogram}
+\item{type}{The type of plot to make: 2D Scatterplot (type = "2D"), 3D  Scatterplot (type = "3D"),  or Dendrogram (type = "tree")}
 
 \item{labels}{Logical value indicating whether data point should be labeled}
 
 \item{...}{Additional arguments to pass to plot/plot3D}
 }
 \description{
-Plot the result of \code{\link{RED_dist}} (or any dist object) in a variety of ways. For scatter plots, Multidimensional scaling (cmdscale()) is used to visualize the distance matrix, for dendrograms, Ward's clustering is used hclust(method = "ward.D2").
+Plot the result of \code{\link{RED_dist}} (or any dist object) in a variety of ways. For scatter plots, Multidimensional scaling (\code{link{cmdscale}}) is used to summarize the distance matrix in 2, or 3 dimenions. For dendrograms, Ward's clustering is used \code{link{hclust}} (method = "ward.D2").
 }
 \seealso{
 \code{\link{RED_dist}}

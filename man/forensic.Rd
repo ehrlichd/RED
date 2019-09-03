@@ -6,7 +6,7 @@
 \title{Forensic sample of dental non-metric trait scores}
 \format{An object of class \code{data.frame} with 877 rows and 12 columns.}
 \usage{
-data(forensic)
+forensic
 }
 \description{
 Forensic sample of dental non-metric trait scores
