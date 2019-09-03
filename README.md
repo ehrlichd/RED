@@ -8,20 +8,27 @@ While RED was developed for use with ordinal (graded) data, it can be calculated
 **Note:** Make sure you install/update both [R](https://cran.r-project.org/) and [Rstudio](https://www.rstudio.com/products/rstudio/download/#download) prior to loading RED.
 
 ### To Install:
-Open Rstudio, run the following code in console:
+Open Rstudio, run the following code in console to install RED:
 
 ```{R}
-install.packages("devtools")
-devtools::install_github("ehrlichd/RED")
+install.packages("remotes")
+remotes::install_github("ehrlichd/RED")
 ```
 
-Think of installing packages as adding a book (package) to your R Library. 
-
-To "read" (load) this package from your library, use:
+Then load the package with
 ```{R}
 library(RED)
 ```
+Think of installing packages as adding a book (package) to your R Library. You only have to go through this step once.
+Each time you open Rstudio, you'll need to reload the package if you want to use it using library()
+
 **Note:** While the install() calls required " " around package names, library() does not!
+
+
+
+
+
+
 
 
 ### Alternative Install: 
