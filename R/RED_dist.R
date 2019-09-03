@@ -44,10 +44,12 @@
 #' grp2 <- rep(c("A","B","C"), each = 100)
 #'
 #'#Calculate distance matrix
+#'
 #' dis2 <- RED_dist(dat2, grp2, dis.only = TRUE)
 #'
+#'
 #'#Visualize
-
+#'
 #' RED_plot(dis2, type = "2D", pch = 15:17, col = 3:5)
 #'
 #'
