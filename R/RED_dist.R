@@ -15,7 +15,7 @@
 #' @examples
 #'
 #'
-#' #with Forensic dataset
+#' ##with Forensic dataset
 #'
 #' dat1 <- forensic #load sample data
 #'
@@ -25,13 +25,17 @@
 #'
 #' dis1 <- RED_dist(grades1, groups1, dis.only = TRUE)
 #'
-#' #Visualize
+#'
+#' #Visualize as Dendro
 #' RED_plot(dis1, type = "tree")
 #'
+#' #Visualize as 3D Scatter plot
 #'
 #' RED_plot(dis1, type = "3D", col = rainbow(length(labels(dis1))), size = 10)
 #'
-#' #Create sample data
+#'
+#'
+#' ##Create sample data
 #' dat.a <- matrix(rnorm(100, mean = 7.5, sd = 1), nrow = 100, ncol = 10)
 #' dat.b <- matrix(rnorm(100, mean = 2.5, sd = 2), nrow = 100, ncol = 10)
 #' dat.c <- matrix(rnorm(100, mean = 4, sd = 1), nrow = 100, ncol = 10)
@@ -40,9 +44,10 @@
 #' grp2 <- rep(c("A","B","C"), each = 100)
 #'
 #'#Calculate distance matrix
-#' dis2 <- RED_dist(dat2, grp2)
+#' dis2 <- RED_dist(dat2, grp2, dis.only = T)
 #'
 #'#Visualize
+
 #' RED_plot(dis2, type = "2D", pch = 15:17, col = 3:5)
 #'
 #'

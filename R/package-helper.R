@@ -32,6 +32,8 @@ NULL
 #' @keywords datasets
 #'
 #'
+#' @usage dat <- forensic
+
 "forensic"
 
 #' Standardize data by calculating z-scores.
