@@ -1,16 +1,16 @@
-#'Plot dist objcect as dendrogram
+#'Visualize distance object
 #'
-#'Plot the result of \code{\link{RED_dist}} (or any dist object) in a variety of ways. For scatter plots, Multidimensional scaling (cmdscale()) is used to visualize the distance matrix, for dendrograms, Ward's clustering is used hclust(method = "ward.D2").
+#'Plot the result of \code{\link{RED_dist}} (or any dist object) in a variety of ways. For scatter plots, Multidimensional scaling (\code{link{cmdscale}}) is used to summarize the distance matrix in 2, or 3 dimenions. For dendrograms, Ward's clustering is used \code{link{hclust}} (method = "ward.D2").
 #'
 #' @param d A distance object
-#' @param type The type of plot to make: 2D Scatterplot (type = "2D"), 3D  Scatterplot (type = "3D"; note: requires \code{\link{rgl}} package),  or Dendrogram (type = "tree")
+#' @param type The type of plot to make: 2D Scatterplot (type = "2D"), 3D  Scatterplot (type = "3D"),  or Dendrogram (type = "tree")
 #' @param labels Logical value indicating whether data point should be labeled
 #' @param ... Additional arguments to pass to plot/plot3D
 #' @export
 #'
 #'
 #' @seealso \code{\link{RED_dist}}
-#' @seealso \code{\link{rgl}}
+#'
 #'
 RED_plot <- function(d, type = c("2D","3D", "tree"), labels = T, ...){
   if (class(d) != "dist"){stop("d must be a dist object")}

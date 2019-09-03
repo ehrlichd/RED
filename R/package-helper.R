@@ -5,6 +5,8 @@
 #'
 #' @title Robust Estimator of grade Difference (RED)
 #' @author Daniel E. Ehrlich (package); Daniels, J., McKean, J., Willermet, C., Edgar, H. (method)
+#'
+#'
 #' @description Package of functions for calculating and visualizing Robust Estimator of grade Difference (RED). RED is a nonparametric method that avoids data compression and allows missing data. Please send any comments, or questions to robustestimator@gmail.com
 #'
 #'
@@ -28,7 +30,7 @@ NULL
 #' @docType data
 #'
 #' @keywords datasets
-#' @usage data(forensic)
+#' @usage dat <- forensic
 #'
 
 "forensic"
