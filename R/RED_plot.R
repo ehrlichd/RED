@@ -16,7 +16,7 @@
 #'
 #'
 RED_plot <- function(d, type = c("2D","3D", "tree"), labels = T, ...){
-  if (class(d) != "dist"){stop("d must be a dist object")}
+  if (!inherits(d, "dist")){stop("d must be a dist object")}
   if (length(type) != 1){stop("'type' must be one of:c( '2D', '3D', 'tree')")}
 
 
