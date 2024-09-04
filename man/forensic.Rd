@@ -4,7 +4,9 @@
 \name{forensic}
 \alias{forensic}
 \title{Forensic sample of dental non-metric trait scores}
-\format{An object of class \code{data.frame} with 877 rows and 12 columns.}
+\format{
+An object of class \code{data.frame} with 877 rows and 12 columns.
+}
 \usage{
 forensic
 }
