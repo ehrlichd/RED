@@ -1,6 +1,6 @@
 Package: RED
 Title: Robust Estimator of grade Difference (RED)
-Version: 0.0.0.9000
+Version: 1.0.0.0000
 Author: John Daniels, J. McKean, Daniel E. Ehrlich, Cathy Willermet, Heather Edgar
 Maintainer: Daniel E. Ehrlich <robustestimator@gmail.com>
 Description: Package of functions for calculating and visualizing Robust Estimator 
